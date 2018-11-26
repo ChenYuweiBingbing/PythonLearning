@@ -1,0 +1,229 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Single Linked List"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## algorithm"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Node:\n",
+    "    def __init__(self, data):\n",
+    "        self.data = data\n",
+    "        self.next = None\n",
+    "\n",
+    "class LinkedList:\n",
+    "    def __init__(self):\n",
+    "        self.head = None\n",
+    "        \n",
+    "    # add to ll's head\n",
+    "    def add(self, data):\n",
+    "        node = Node(data)\n",
+    "        if self.head == None :\n",
+    "            self.head = node\n",
+    "        else:\n",
+    "            node.next = self.head\n",
+    "            self.head = node\n",
+    "            \n",
+    "    # remove ll's head\n",
+    "    def remove(self):\n",
+    "        if self.head != None :\n",
+    "            tmp = self.head\n",
+    "            self.head = tmp.next\n",
+    "            \n",
+    "    def search(self, k):\n",
+    "        p = self.head\n",
+    "        while p != None :\n",
+    "            if p.data == k :\n",
+    "                return p\n",
+    "            p = p.next\n",
+    "        return None\n",
+    "    \n",
+    "    def __str__(self) :\n",
+    "        s = \"\"\n",
+    "        p = self.head\n",
+    "        while p != None :\n",
+    "            s += p.data + ' '\n",
+    "            p = p.next\n",
+    "        return s"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## run"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "c b a \n",
+      "b a \n",
+      "a \n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "ll = LinkedList()\n",
+    "\n",
+    "ll.add( 'a' )\n",
+    "ll.add( 'b' )\n",
+    "ll.add( 'c' )\n",
+    "\n",
+    "print ll\n",
+    "ll.remove()\n",
+    "print ll\n",
+    "ll.remove()\n",
+    "print ll\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Double Linked List"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## algorithm"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Node:\n",
+    "    def __init__(self, data):\n",
+    "        self.data = data\n",
+    "        self.next = None\n",
+    "        self.prev = None\n",
+    "\n",
+    "class LinkedList:\n",
+    "    def __init__(self):\n",
+    "        self.head = None\n",
+    "        \n",
+    "    # add to ll's head\n",
+    "    def add(self, data):\n",
+    "        node = Node(data)\n",
+    "        if self.head == None :\n",
+    "            self.head = node\n",
+    "        else:\n",
+    "            node.next = self.head\n",
+    "            node.next.prev = node\n",
+    "            self.head = node\n",
+    "            \n",
+    "    # remove node p in ll\n",
+    "    def remove(self, p):\n",
+    "        if p == self.head :\n",
+    "            self.head = p.next\n",
+    "        else:\n",
+    "            tmp = p.prev\n",
+    "            tmp.next = p.next\n",
+    "            if tmp.next != None :\n",
+    "                tmp.next.prev = tmp\n",
+    "        \n",
+    "    def search(self, k):\n",
+    "        p = self.head\n",
+    "        while p != None :\n",
+    "            if p.data == k :\n",
+    "                return p\n",
+    "            p = p.next\n",
+    "        return None\n",
+    "    \n",
+    "    def __str__(self) :\n",
+    "        s = \"\"\n",
+    "        p = self.head\n",
+    "        while p != None :\n",
+    "            s += p.data + ' '\n",
+    "            p = p.next\n",
+    "        return s"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## run"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "c b a \n",
+      "c a \n",
+      "a \n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "ll = LinkedList()\n",
+    "\n",
+    "ll.add( 'a' )\n",
+    "ll.add( 'b' )\n",
+    "ll.add( 'c' )\n",
+    "\n",
+    "print ll\n",
+    "ll.remove( ll.search( 'b' ) )\n",
+    "print ll\n",
+    "ll.remove( ll.search( 'c' ) )\n",
+    "print ll\n",
+    "ll.remove( ll.search( 'a' ) )\n",
+    "print ll"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 2",
+   "language": "python",
+   "name": "python2"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 2
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython2",
+   "version": "2.7.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
